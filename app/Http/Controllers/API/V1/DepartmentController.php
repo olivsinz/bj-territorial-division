@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Departments\StoreDepartmentRequest;
-use App\Http\Requests\Departments\UpdateDepartmentRequest;
 use App\Models\Department;
 
 class DepartmentController extends Controller
@@ -20,25 +18,9 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreDepartmentRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Department $department)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateDepartmentRequest $request, Department $department)
     {
         //
     }
