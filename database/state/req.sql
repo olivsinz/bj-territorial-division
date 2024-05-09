@@ -1,5 +1,5 @@
-INSERT INTO departments(id,name) VALUES
-(1, 'ALIBORI'),
+INSERT INTO departments(id,name) VALUES 
+(1, 'ALIBORI'), 
 (2, 'ATACORA'),
 (3, 'ATLANTIQUE'),
 (4, 'BORGOU'),
