@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\API\V1\DepartmentController;
-use App\Http\Controllers\API\V1\DepartmentDistrictController;
-use App\Http\Controllers\API\V1\DepartmentNeighborhoodController;
-use App\Http\Controllers\API\V1\DepartmentTownController;
+use App\Http\Controllers\API\V1\Departments\DepartmentController;
+use App\Http\Controllers\API\V1\Departments\DepartmentDistrictController;
+use App\Http\Controllers\API\V1\Departments\DepartmentNeighborhoodController;
+use App\Http\Controllers\API\V1\Departments\DepartmentTownController;
 use App\Http\Controllers\API\V1\Districts\DistrictController;
 use App\Http\Controllers\API\V1\Districts\DistrictNeighborhoodController;
 use App\Http\Controllers\API\V1\NeighborhoodController;
-use App\Http\Controllers\API\V1\TownController;
-use App\Http\Controllers\API\V1\TownDistrictController;
-use App\Http\Controllers\API\V1\TownNeighborhoodController;
+use App\Http\Controllers\API\V1\Towns\TownController;
+use App\Http\Controllers\API\V1\Towns\TownDistrictController;
+use App\Http\Controllers\API\V1\Towns\TownNeighborhoodController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
