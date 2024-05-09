@@ -22,7 +22,7 @@ class DepartmentNeighborhoodController extends Controller
             ->join('departments', 'departments.id', '=', 'towns.department_id')
             ->where('departments.name', $department->name)
             ->get();
-        
+
         return response()->json(['department' => $department->name, 'neighborhoods' => $neighborhoods]);
     }
 

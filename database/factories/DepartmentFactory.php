@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Department;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Department>
  */
 class DepartmentFactory extends Factory
 {
-        /**
+    /**
      * The name of the factory's corresponding model.
      *
      * @var string
@@ -25,7 +25,7 @@ class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name()
+            'name' => fake()->name(),
         ];
     }
 }

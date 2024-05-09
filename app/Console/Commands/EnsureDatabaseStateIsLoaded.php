@@ -16,7 +16,7 @@ class EnsureDatabaseStateIsLoaded extends Command
      */
     protected $signature = self::COMMAND_SIGNATURE;
 
-/**
+    /**
      * The console command description.
      *
      * @var string

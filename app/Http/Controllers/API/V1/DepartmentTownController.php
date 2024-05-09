@@ -17,8 +17,8 @@ class DepartmentTownController extends Controller
         $towns = $department->towns;
 
         return response()->json([
-            'department' => $department->name, 
-            'towns' => $towns
+            'department' => $department->name,
+            'towns' => $towns,
         ]);
     }
 

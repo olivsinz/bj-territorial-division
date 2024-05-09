@@ -59,6 +59,9 @@
         ],
         "scan-packages": [
             "./vendor/bin/composer-dependency-analyser"
+        ],
+        "style": [
+            "./vendor/bin/pint"
         ]
     },
     "extra": {

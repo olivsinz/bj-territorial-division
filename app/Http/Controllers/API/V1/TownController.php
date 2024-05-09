@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTownRequest;
-use App\Http\Requests\UpdateTownRequest;
 use App\Models\Town;
 
 class TownController extends Controller

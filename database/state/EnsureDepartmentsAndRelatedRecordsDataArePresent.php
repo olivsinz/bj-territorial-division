@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\File;
 class EnsureDepartmentsAndRelatedRecordsDataArePresent
 {
     protected const DEPARTMENTS_COUNT = 12;
+
     protected const TOWNS_COUNT = 77;
+
     protected const DISTRICTS_COUNT = 546;
+
     protected const NEIGHBORHOODS_COUNT = 5304;
 
     /**
@@ -48,7 +51,7 @@ class EnsureDepartmentsAndRelatedRecordsDataArePresent
             foreach ($splittedIndividualQueries as $query) {
                 $query = trim($query);
 
-                if (!empty($query)) {
+                if (! empty($query)) {
                     DB::statement($query);
                 }
             }
@@ -70,8 +73,8 @@ class EnsureDepartmentsAndRelatedRecordsDataArePresent
      */
     private function present()
     {
-        return DB::table('departments')->count() >= self::DEPARTMENTS_COUNT 
-            && DB::table('towns')->count() >= self::TOWNS_COUNT 
+        return DB::table('departments')->count() >= self::DEPARTMENTS_COUNT
+            && DB::table('towns')->count() >= self::TOWNS_COUNT
             && DB::table('districts')->count() >= self::DISTRICTS_COUNT
             && DB::table('neighborhoods')->count() >= self::NEIGHBORHOODS_COUNT;
     }
