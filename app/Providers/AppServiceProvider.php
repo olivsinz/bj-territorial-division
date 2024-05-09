@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
+use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        if ($this->app->environment('local')) {
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 
     /**
@@ -26,5 +32,31 @@ class AppServiceProvider extends ServiceProvider
         ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
             return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });
+
+        if ($this->app->isProduction()) {
+            Model::handleLazyLoadingViolationUsing(function ($model, $relation) {
+                $class = get_class($model);
+
+                info("Attempted to lazy load [{$relation}] on model [{$class}].");
+            });
+        }
+
+        if ($this->app->runningInConsole()) {
+            // Log slow commands.
+            $this->app[ConsoleKernel::class]->whenCommandLifecycleIsLongerThan(
+                5000,
+                function ($startedAt, $input, $status) {
+                    Log::warning("A command [{$input}] took longer than 5 seconds. Started At: [{$startedAt}], Status: [{$status}]");
+                }
+            );
+        } else {
+            // Log slow requests.
+            $this->app[HttpKernel::class]->whenRequestLifecycleIsLongerThan(
+                5000,
+                function ($startedAt, $request, $response) {
+                    Log::warning("A request to [{$request->fullUrl()}] took longer than 5 seconds.");
+                }
+            );
+        }
     }
 }

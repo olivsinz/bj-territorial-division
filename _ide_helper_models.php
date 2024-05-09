@@ -19,6 +19,10 @@ namespace App\Models{
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\District> $districts
+ * @property-read int|null $districts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Town> $towns
+ * @property-read int|null $towns_count
  * @method static \Database\Factories\DepartmentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Department newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Department newQuery()
@@ -29,6 +33,78 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Department whereUpdatedAt($value)
  */
 	class Department extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $town_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Neighborhood> $neighborhoods
+ * @property-read int|null $neighborhoods_count
+ * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|District newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|District newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|District query()
+ * @method static \Illuminate\Database\Eloquent\Builder|District whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|District whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|District whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|District whereTownId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|District whereUpdatedAt($value)
+ */
+	class District extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $district_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\District $district
+ * @method static \Database\Factories\NeighborhoodFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Neighborhood newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Neighborhood newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Neighborhood query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Neighborhood whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Neighborhood whereDistrictId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Neighborhood whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Neighborhood whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Neighborhood whereUpdatedAt($value)
+ */
+	class Neighborhood extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $department_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Department $department
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Neighborhood> $neighborhoods
+ * @property-read int|null $neighborhoods_count
+ * @method static \Database\Factories\TownFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Town newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Town newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Town query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Town whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Town whereDepartmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Town whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Town whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Town whereUpdatedAt($value)
+ */
+	class Town extends \Eloquent {}
 }
 
 namespace App\Models{
