@@ -61,7 +61,18 @@
             "./vendor/bin/composer-dependency-analyser"
         ],
         "style": [
-            "./vendor/bin/pint"
+            "./vendor/bin/pint -v --ansi"
+        ],
+        "phpstan": [
+            "./vendor/bin/phpstan analyse -v  --ansi"
+        ],
+        "pest": [
+            "./vendor/bin/pest --colors=always"
+        ],
+        "ide-helper": [
+            "@php artisan ide-helper:generate --ansi",
+            "@php artisan ide-helper:models --nowrite --ansi",
+            "@php artisan ide-helper:meta --ansi"
         ]
     },
     "extra": {

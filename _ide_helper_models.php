@@ -39,12 +39,12 @@ namespace App\Models{
 /**
  * 
  *
+ * @property-read \Illuminate\Database\Eloquent\Collection $neighborhoods
  * @property int $id
  * @property string $name
  * @property int $town_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Neighborhood> $neighborhoods
  * @property-read int|null $neighborhoods_count
  * @method static \Database\Factories\DistrictFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|District newModelQuery()
