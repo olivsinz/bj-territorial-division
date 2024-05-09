@@ -26,7 +26,7 @@ class EnsureDatabaseStateIsLoaded extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->info("\nLoading database state (Tasks are idempotents) ...");
 
