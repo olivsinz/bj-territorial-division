@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Artisan;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
@@ -37,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+            /** @var \Illuminate\Contracts\Auth\CanResetPassword  $notifiable */
             return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });
 
@@ -46,24 +48,6 @@ class AppServiceProvider extends ServiceProvider
 
                 info("Attempted to lazy load [{$relation}] on model [{$class}].");
             });
-        }
-
-        if ($this->app->runningInConsole()) {
-            // Log slow commands.
-            $this->app[ConsoleKernel::class]->whenCommandLifecycleIsLongerThan(
-                5000,
-                function ($startedAt, $input, $status) {
-                    Log::warning("A command [{$input}] took longer than 5 seconds. Started At: [{$startedAt}], Status: [{$status}]");
-                }
-            );
-        } else {
-            // Log slow requests.
-            $this->app[HttpKernel::class]->whenRequestLifecycleIsLongerThan(
-                5000,
-                function ($startedAt, $request, $response) {
-                    Log::warning("A request to [{$request->fullUrl()}] took longer than 5 seconds.");
-                }
-            );
         }
     }
 }
