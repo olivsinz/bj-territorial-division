@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNeighborhoodRequest;
-use App\Http\Requests\UpdateNeighborhoodRequest;
 use App\Models\Neighborhood;
 
 class NeighborhoodController extends Controller
