@@ -2,14 +2,10 @@
 
 namespace App\Providers;
 
-use Artisan;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
-use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
