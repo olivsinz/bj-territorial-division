@@ -13,11 +13,9 @@ class DepartmentTownController extends Controller
      */
     public function index(Department $department): JsonResponse
     {
-        $towns = $department->towns;
-
         return response()->json([
             'department' => $department->name,
-            'towns' => $towns,
+            'towns' => $department->towns,
         ]);
     }
 }
