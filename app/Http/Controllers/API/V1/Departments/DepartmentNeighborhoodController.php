@@ -25,8 +25,8 @@ class DepartmentNeighborhoodController extends Controller
         });
 
         return response()->json([
-            'department' => $department->name, 
-            'neighborhoods' => $neighborhoods
+            'department' => $department->name,
+            'neighborhoods' => $neighborhoods,
         ]);
     }
 }
