@@ -14,7 +14,7 @@ class DepartmentController extends Controller
     public function index(): JsonResponse
     {
         $departments = cache()->remember('departments', now()->addMonths(6), function () {
-            return Department::all();
+            return Department::select('id', 'name')->get();
         });
 
         return response()->json($departments);
