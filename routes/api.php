@@ -25,39 +25,39 @@ Route::middleware(['throttle:api'])->prefix('v1')->group(function () {
             });
 
             Route::controller(DepartmentTownController::class)->group(function () {
-                Route::get('/{department}/towns', 'index');
+                Route::get('{department}/towns', 'index');
             });
 
             Route::controller(DepartmentDistrictController::class)->group(function () {
-                Route::get('/{department}/districts', 'index');
+                Route::get('{department}/districts', 'index');
             });
 
             Route::controller(DepartmentNeighborhoodController::class)->group(function () {
-                Route::get('/{department}/neighborhoods', 'index');
+                Route::get('{department}/neighborhoods', 'index');
             });
         });
 
-    Route::prefix('/towns')
+    Route::prefix('towns')
         ->group(function () {
             Route::get('/', [TownController::class, 'index']);
 
             Route::controller(TownDistrictController::class)->group(function () {
-                Route::get('/{town}/districts', 'index');
+                Route::get('{town}/districts', 'index');
             });
 
             Route::controller(TownNeighborhoodController::class)->group(function () {
-                Route::get('/{town}/neighborhoods', 'index');
+                Route::get('{town}/neighborhoods', 'index');
             });
         });
 
-    Route::prefix('/districts')
+    Route::prefix('districts')
         ->group(function () {
             Route::get('/', [DistrictController::class, 'index']);
 
             Route::controller(DistrictNeighborhoodController::class)->group(function () {
-                Route::get('/{district}/neighborhoods', 'index');
+                Route::get('{district}/neighborhoods', 'index');
             });
         });
 
-    Route::get('/neighborhoods', [NeighborhoodController::class, 'index']);
+    Route::get('neighborhoods', [NeighborhoodController::class, 'index']);
 });

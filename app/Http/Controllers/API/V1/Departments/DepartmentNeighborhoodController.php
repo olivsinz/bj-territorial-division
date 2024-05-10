@@ -14,7 +14,7 @@ class DepartmentNeighborhoodController extends Controller
      */
     public function index(Department $department): JsonResponse
     {
-        $neighborhoods = cache()->remember('departments.'.$department->name.'.neighborhoods', now()->addMonths(6), function () use ($department) {
+        $neighborhoods = cache()->remember('departments.' . $department->name . '.neighborhoods', now()->addMonths(6), function () use ($department) {
             return DB::table('neighborhoods')
                 ->select('neighborhoods.name')
                 ->join('districts', 'districts.id', '=', 'neighborhoods.district_id')

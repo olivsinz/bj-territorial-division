@@ -1,0 +1,19 @@
+{
+    "include": ["app", "bootstrap", "config", "routes", "tests"],
+    "exclude": [
+        "tests/Fixtures",
+        "tests/Pest.php",
+        "./_ide_helper.php",
+        "./_ide_helper_models.php"
+    ],
+    "scripts": {
+        "lint": {
+            "PHP Version": ["php", "-v"],
+            "PHPStan Version": ["./vendor/bin/phpstan", "-V"],
+            "phpstan": ["./vendor/bin/phpstan", "analyse"],
+            "Pest Version": ["./vendor/bin/pest", "--version"],
+            "pest": ["./vendor/bin/pest"]
+        }
+    },
+    "processTimeout": 120
+}

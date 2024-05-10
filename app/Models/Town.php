@@ -40,8 +40,8 @@ class Town extends Model
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value
-     * @param  string|null  $field
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @param  null|string  $field
+     * @return null|\Illuminate\Database\Eloquent\Model
      */
     public function resolveRouteBinding($value, $field = null)
     {

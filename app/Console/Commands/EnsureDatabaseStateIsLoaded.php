@@ -30,7 +30,7 @@ class EnsureDatabaseStateIsLoaded extends Command
     {
         $this->info("\nLoading database state (Tasks are idempotents) ...");
 
-        (new EnsureDepartmentsAndRelatedRecordsDataArePresent())->handle();
+        (new EnsureDepartmentsAndRelatedRecordsDataArePresent)->handle();
 
         $this->info("\nDatabase state is loaded successfully!\n");
     }

@@ -27,7 +27,9 @@
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
         "shipmonk/composer-dependency-analyser": "^1.5",
-        "spatie/laravel-ignition": "^2.4"
+        "spatie/laravel-ignition": "^2.4",
+        "tightenco/duster": "^2.7",
+        "tightenco/tlint": "^9.3"
     },
     "autoload": {
         "psr-4": {
@@ -74,6 +76,15 @@
             "@php artisan ide-helper:generate --ansi",
             "@php artisan ide-helper:models --nowrite --ansi",
             "@php artisan ide-helper:meta --ansi"
+        ],
+        "tlint": [
+            "./vendor/bin/tlint --ansi"
+        ],
+        "duster-lint": [
+            "./vendor/bin/duster lint --ansi"
+        ],
+        "duster-fix": [
+            "./vendor/bin/duster fix --ansi"
         ]
     },
     "extra": {
