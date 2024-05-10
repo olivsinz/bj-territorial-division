@@ -13,7 +13,9 @@ class TownController extends Controller
      */
     public function index(): JsonResponse
     {
-        $towns = Town::all();
+        $towns = cache()->remember('departments', now()->addMonths(6), function () {
+            return Town::all();
+        });
 
         return response()->json($towns);
     }
