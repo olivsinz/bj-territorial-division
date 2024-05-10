@@ -14,7 +14,7 @@ class DistrictController extends Controller
     public function index(): JsonResponse
     {
         $districts = cache()->remember('districts', now()->addMonths(6), function () {
-            return District::all();
+            return District::select('id', 'name')->get();
         });
 
         return response()->json($districts);
