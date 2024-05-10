@@ -16,7 +16,7 @@ class VerifyEmailController extends Controller
     {
         /** @var \Illuminate\Contracts\Auth\MustVerifyEmail $user */
         $user = $request->user();
-        
+
         if ($user->hasVerifiedEmail()) {
             return redirect()->intended(
                 config('app.frontend_url').'/dashboard?verified=1'

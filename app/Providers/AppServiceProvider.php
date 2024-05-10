@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         ResetPassword::createUrlUsing(function (mixed $notifiable, string $token) {
-            /** @var \Illuminate\Contracts\Auth\CanResetPassword  $notifiable */
+            /** @var \Illuminate\Contracts\Auth\CanResetPassword $notifiable */
             return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });
 

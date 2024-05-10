@@ -4,9 +4,7 @@ namespace App\Http\Controllers\API\V1\Departments;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
-use App\Models\Neighborhood;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DepartmentNeighborhoodController extends Controller

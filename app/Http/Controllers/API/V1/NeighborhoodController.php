@@ -15,9 +15,9 @@ class NeighborhoodController extends Controller
     public function index(Request $request): JsonResponse
     {
         $neighborhoods = Neighborhood::paginate(
-            $request->integer('page_size', 20), 
-            ['*'], 
-            'page', 
+            $request->integer('page_size', 20),
+            ['*'],
+            'page',
             $request->integer('page', 1)
         );
 
