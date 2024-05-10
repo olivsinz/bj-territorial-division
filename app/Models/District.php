@@ -30,6 +30,7 @@ class District extends Model
      */
     public function resolveRouteBinding($value, $field = null)
     {
+        /** @var string $value */
         return $this->where('name', str($value)->upper())->firstOrFail();
     }
 }

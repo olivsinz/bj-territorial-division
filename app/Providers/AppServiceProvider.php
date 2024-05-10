@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
-        ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+        ResetPassword::createUrlUsing(function (mixed $notifiable, string $token) {
             /** @var \Illuminate\Contracts\Auth\CanResetPassword  $notifiable */
             return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });

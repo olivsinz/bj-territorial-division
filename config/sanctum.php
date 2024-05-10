@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf( // @phpstan-ignore-line
         '%s%s%s',
         'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
         Sanctum::currentApplicationUrlWithPort(),
-        env('FRONTEND_URL') ? ','.parse_url(env('FRONTEND_URL'), PHP_URL_HOST) : ''
+        env('FRONTEND_URL') ? ','.parse_url(env('FRONTEND_URL'), PHP_URL_HOST) : '' // @phpstan-ignore-line
     ))),
 
     /*

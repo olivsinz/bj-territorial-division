@@ -14,10 +14,12 @@ class NeighborhoodController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $page = $request->input('page', 1);
-        $pageSize = $request->input('page_size', 20);
-
-        $neighborhoods = Neighborhood::paginate($pageSize, ['*'], 'page', $page);
+        $neighborhoods = Neighborhood::paginate(
+            $request->integer('page_size', 20), 
+            ['*'], 
+            'page', 
+            $request->integer('page', 1)
+        );
 
         return response()->json($neighborhoods);
     }
