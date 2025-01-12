@@ -49,7 +49,7 @@ class EnsureDepartmentsAndRelatedRecordsDataArePresent
             $splittedIndividualQueries = explode(';', $sqlStatements);
 
             foreach ($splittedIndividualQueries as $query) {
-                $query = mb_trim($query);
+                $query = trim($query);
 
                 if (! empty($query)) {
                     DB::statement($query);
