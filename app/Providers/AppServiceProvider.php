@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureModels();
         $this->configureCommands();
         $this->configureRateLimiter();
-        
+
         ResetPassword::createUrlUsing(function (mixed $notifiable, string $token) {
             /** @var \Illuminate\Contracts\Auth\CanResetPassword $notifiable */
             return config('app.frontend_url') . "/password-reset/{$token}?email={$notifiable->getEmailForPasswordReset()}";
