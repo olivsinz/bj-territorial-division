@@ -13,7 +13,7 @@ class TownController extends Controller
      */
     public function index(): JsonResponse
     {
-        $towns = cache()->remember('towns', now()->addMonths(6), function () {
+        $towns = cache()->remember('towns', now()->addMonths(1), function () {
             return Town::select('id', 'name')->get();
         });
 

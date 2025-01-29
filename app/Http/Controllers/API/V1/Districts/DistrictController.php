@@ -13,7 +13,7 @@ class DistrictController extends Controller
      */
     public function index(): JsonResponse
     {
-        $districts = cache()->remember('districts', now()->addMonths(6), function () {
+        $districts = cache()->remember('districts', now()->addMonths(1), function () {
             return District::select('id', 'name')->get();
         });
 

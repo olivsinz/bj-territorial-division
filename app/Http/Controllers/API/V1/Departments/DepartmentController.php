@@ -13,7 +13,7 @@ class DepartmentController extends Controller
      */
     public function index(): JsonResponse
     {
-        $departments = cache()->remember('departments', now()->addMonths(6), function () {
+        $departments = cache()->remember('departments', now()->addMonths(1), function () {
             return Department::select('id', 'name')->get();
         });
 
