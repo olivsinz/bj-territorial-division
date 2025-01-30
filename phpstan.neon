@@ -19,10 +19,7 @@ parameters:
         - ./vendor
         - ./storage
         - ./public
-        - ./node_modules
         - ./_ide_helper.php
         - ./_ide_helper_models.php
-
-    checkGenericClassInNonGenericObjectType: false
 
     editorUrl: 'vscode://file/%%file%%:%%line%%'

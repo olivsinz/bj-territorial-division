@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Neighborhood extends Model
 {
+    /** @use HasFactory<\Database\Factories\NeighborhoodFactory> */
     use HasFactory;
 
     /**

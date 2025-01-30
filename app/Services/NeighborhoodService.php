@@ -19,7 +19,7 @@ class NeighborhoodService
     }
 
     /**
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator<>
      */
     public function get(int $pageSize = 20, int $page = 1)
     {

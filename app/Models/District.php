@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class District extends Model
 {
+    /** @use HasFactory<\Database\Factories\DistrictFactory> */
     use HasFactory;
 
     /**

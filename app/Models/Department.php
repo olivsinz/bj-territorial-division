@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Department extends Model
 {
+    /** @use HasFactory<\Database\Factories\DepartmentFactory> */
     use HasFactory;
 
     /**

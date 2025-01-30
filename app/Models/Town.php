@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Town extends Model
 {
+    /** @use HasFactory<\Database\Factories\TownFactory> */
     use HasFactory;
 
     /**
