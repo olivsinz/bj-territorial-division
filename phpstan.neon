@@ -1,5 +1,6 @@
 includes:
-    - ./vendor/larastan/larastan/extension.neon
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
 
 parameters:
     checkModelProperties: true
@@ -9,8 +10,8 @@ parameters:
         - bootstrap
         - config
 
-    # Level 9 is the highest level
-    level: 9
+    # Level 10 is the highest level
+    level: 10
 
     ignoreErrors:
       
