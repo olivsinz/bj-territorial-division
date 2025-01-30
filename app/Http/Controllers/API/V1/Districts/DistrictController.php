@@ -13,10 +13,16 @@ class DistrictController extends Controller
      */
     public function index(): JsonResponse
     {
-        $districts = cache()->remember('districts', now()->addMonths(1), function () {
+        $cacheTTL = 3600;
+        $cacheKey = 'districts';
+
+        $districts = cache()->remember($cacheKey, $cacheTTL, function () {
             return District::select('id', 'name')->get();
         });
 
-        return response()->json($districts);
+        return response()
+            ->json($districts)
+            ->header('Cache-Control', 'public, max-age=' . $cacheTTL)
+            ->setEtag(md5($cacheKey));
     }
 }

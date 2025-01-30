@@ -13,10 +13,15 @@ class TownController extends Controller
      */
     public function index(): JsonResponse
     {
-        $towns = cache()->remember('towns', now()->addMonths(1), function () {
+        $cacheTTL = 3600;
+        $cacheKey = 'towns';
+
+        $towns = cache()->remember($cacheKey, $cacheTTL, function () {
             return Town::select('id', 'name')->get();
         });
 
-        return response()->json($towns);
+        return response()->json($towns)
+            ->header('Cache-Control', 'public, max-age=' . $cacheTTL)
+            ->setEtag(md5($cacheKey));
     }
 }

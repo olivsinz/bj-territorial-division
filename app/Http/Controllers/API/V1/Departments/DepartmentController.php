@@ -13,10 +13,16 @@ class DepartmentController extends Controller
      */
     public function index(): JsonResponse
     {
-        $departments = cache()->remember('departments', now()->addMonths(1), function () {
+        $cacheTTL = 3600;
+        $cacheKey = 'departments';
+
+        $departments = cache()->remember($cacheKey, $cacheTTL, function () {
             return Department::select('id', 'name')->get();
         });
 
-        return response()->json($departments);
+        return response()
+            ->json($departments)
+            ->header('Cache-Control', 'public, max-age=' . $cacheTTL)
+            ->setEtag(md5($cacheKey));
     }
 }
