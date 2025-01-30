@@ -4,6 +4,7 @@ namespace Database\State;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class EnsureDepartmentsAndRelatedRecordsDataArePresent
 {
@@ -49,7 +50,7 @@ class EnsureDepartmentsAndRelatedRecordsDataArePresent
             $splittedIndividualQueries = explode(';', $sqlStatements);
 
             foreach ($splittedIndividualQueries as $query) {
-                $query = mb_trim($query);
+                $query = Str::trim($query);
 
                 if (! empty($query)) {
                     DB::statement($query);

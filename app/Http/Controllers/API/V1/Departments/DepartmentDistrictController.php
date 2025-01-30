@@ -13,9 +13,12 @@ class DepartmentDistrictController extends Controller
      */
     public function index(Department $department): JsonResponse
     {
-        return response()->json([
-            'department' => $department->name,
-            'districts' => $department->districts,
-        ]);
+        return response()
+            ->json([
+                'department' => $department->name,
+                'districts' => $department->districts,
+            ])
+            ->header('Cache-Control', 'public, max-age=3600')
+            ->setEtag(md5($department->name));
     }
 }

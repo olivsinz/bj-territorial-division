@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\Districts;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class DistrictController extends Controller
 {
@@ -13,10 +14,16 @@ class DistrictController extends Controller
      */
     public function index(): JsonResponse
     {
-        $districts = cache()->remember('districts', now()->addMonths(6), function () {
+        $cacheTTL = 3600;
+        $cacheKey = 'districts';
+
+        $districts = Cache::remember($cacheKey, $cacheTTL, function () {
             return District::select('id', 'name')->get();
         });
 
-        return response()->json($districts);
+        return response()
+            ->json($districts)
+            ->header('Cache-Control', 'public, max-age=' . $cacheTTL)
+            ->setEtag(md5($cacheKey));
     }
 }

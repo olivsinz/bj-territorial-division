@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Department extends Model
 {
+    /** @use HasFactory<\Database\Factories\DepartmentFactory> */
     use HasFactory;
 
     /**
      * Get the towns for the department.
+     *
+     * @return HasMany<\App\Models\Town, $this>
      */
     public function towns(): HasMany
     {
@@ -21,6 +24,8 @@ class Department extends Model
 
     /**
      * Get all of the districts for the department.
+     *
+     * @return HasManyThrough<\App\Models\District, \App\Models\Town, $this>
      */
     public function districts(): HasManyThrough
     {

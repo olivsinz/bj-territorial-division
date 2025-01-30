@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Town extends Model
 {
+    /** @use HasFactory<\Database\Factories\TownFactory> */
     use HasFactory;
 
     /**
      * Get the department that owns the town.
+     *
+     * @return BelongsTo<\App\Models\Department, $this>
      */
     public function department(): BelongsTo
     {
@@ -22,6 +25,8 @@ class Town extends Model
 
     /**
      * Get all of the neighborhoods for the town.
+     *
+     * @return HasManyThrough<\App\Models\Neighborhood, \App\Models\District, $this>
      */
     public function neighborhoods(): HasManyThrough
     {
@@ -30,6 +35,8 @@ class Town extends Model
 
     /**
      * Get the districts for the town.
+     *
+     * @return HasMany<\App\Models\District, $this>
      */
     public function districts(): HasMany
     {

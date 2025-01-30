@@ -1,0 +1,90 @@
+name: Duster Fix
+
+# Commits made in here will not trigger any workflows
+# Checkout Duster's documentation for a workaround
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  duster:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: "Duster Fix"
+        uses: tighten/duster-action@v2
+        with:
+          args: fix
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        id: auto_commit_action
+        with:
+          commit_message: Dusting
+          commit_user_name: GitHub Action
+          commit_user_email: actions@github.com
+
+      - name: Ignore Duster commit in git blame
+        if: steps.auto_commit_action.outputs.changes_detected == 'true'
+        run: echo ${{ steps.auto_commit_action.outputs.commit_hash }} >> .git-blame-ignore-revs
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Ignore Dusting commit in git blame
+          commit_user_name: GitHub Action
+          commit_user_email: actions@github.com
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite3, pdo_sqlite, php-sqlite3, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+          tools: composer:v2
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install PHP dependencies
+        run: |
+          composer install --prefer-dist --no-progress --no-ansi --no-interaction
+          echo "${PWD}/vendor/bin" >> $GITHUB_PATH
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+
+      - name: Tlint Code Inspection
+        run: |
+          ./vendor/bin/tlint
+
+      - name: "Duster Lint"
+        uses: tighten/duster-action@v2
+        with:
+          args: lint --using=phpstan,phpcs,php-cs-fixer,pint
+
+      - name: Execute Unit/Features Tests
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+          CACHE_DRIVER: array
+          SESSION_DRIVER: array
+          QUEUE_CONNECTION: sync
+        run: vendor/bin/pest --colors=always

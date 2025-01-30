@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\Towns;
 use App\Http\Controllers\Controller;
 use App\Models\Town;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class TownController extends Controller
 {
@@ -13,10 +14,16 @@ class TownController extends Controller
      */
     public function index(): JsonResponse
     {
-        $towns = cache()->remember('towns', now()->addMonths(6), function () {
+        $cacheTTL = 3600;
+        $cacheKey = 'towns';
+
+        $towns = Cache::remember($cacheKey, $cacheTTL, function () {
             return Town::select('id', 'name')->get();
         });
 
-        return response()->json($towns);
+        return response()
+            ->json($towns)
+            ->header('Cache-Control', 'public, max-age=' . $cacheTTL)
+            ->setEtag(md5($cacheKey));
     }
 }

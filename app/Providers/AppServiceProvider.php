@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,23 +27,42 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Model::shouldBeStrict();
-
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
-        });
-
-        ResetPassword::createUrlUsing(function (mixed $notifiable, string $token) {
-            /** @var \Illuminate\Contracts\Auth\CanResetPassword $notifiable */
-            return config('app.frontend_url') . "/password-reset/{$token}?email={$notifiable->getEmailForPasswordReset()}";
-        });
+        $this->configureModels();
+        $this->configureCommands();
+        $this->configureRateLimiter();
 
         if ($this->app->environment('production')) {
-            Model::handleLazyLoadingViolationUsing(function ($model, $relation) {
+            Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
                 $class = get_class($model);
 
                 info("Attempted to lazy load [{$relation}] on model [{$class}].");
             });
         }
+    }
+
+    /**
+     * Configure the models.
+     */
+    private function configureModels(): void
+    {
+        Model::shouldBeStrict();
+    }
+
+    /**
+     * configure the application's commands
+     */
+    private function configureCommands(): void
+    {
+        DB::prohibitDestructiveCommands($this->app->isProduction());
+    }
+
+    /**
+     * configure rate limiter
+     */
+    private function configureRateLimiter(): void
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
     }
 }

@@ -13,9 +13,12 @@ class DistrictNeighborhoodController extends Controller
      */
     public function index(District $district): JsonResponse
     {
-        return response()->json([
-            'district' => $district->name,
-            'neighborhoods' => $district->neighborhoods,
-        ]);
+        return response()
+            ->json([
+                'district' => $district->name,
+                'neighborhoods' => $district->neighborhoods,
+            ])
+            ->header('Cache-Control', 'public, max-age=3600')
+            ->setEtag(md5($district->name));
     }
 }

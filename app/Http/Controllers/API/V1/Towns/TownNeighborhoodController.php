@@ -13,9 +13,12 @@ class TownNeighborhoodController extends Controller
      */
     public function index(Town $town): JsonResponse
     {
-        return response()->json([
-            'town' => $town->name,
-            'neighborhoods' => $town->neighborhoods,
-        ]);
+        return response()
+            ->json([
+                'town' => $town->name,
+                'neighborhoods' => $town->neighborhoods,
+            ])
+            ->header('Cache-Control', 'public, max-age=3600')
+            ->setEtag(md5($town->name));
     }
 }

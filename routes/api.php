@@ -13,27 +13,24 @@ use App\Http\Controllers\API\V1\Towns\TownNeighborhoodController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::middleware(['throttle:api'])->prefix('v1')->group(function () {
     Route::prefix('departments')
+        ->name('departments.')
         ->group(function () {
             Route::controller(DepartmentController::class)->group(function () {
                 Route::get('/', 'index')->name('index');
             });
 
-            Route::controller(DepartmentTownController::class)->group(function () {
-                Route::get('{department}/towns', 'index');
+            Route::controller(DepartmentTownController::class)->name('towns.')->group(function () {
+                Route::get('{department}/towns', 'index')->name('index');
             });
 
-            Route::controller(DepartmentDistrictController::class)->group(function () {
-                Route::get('{department}/districts', 'index');
+            Route::controller(DepartmentDistrictController::class)->name('towns.')->group(function () {
+                Route::get('{department}/districts', 'index')->name('index');
             });
 
-            Route::controller(DepartmentNeighborhoodController::class)->group(function () {
-                Route::get('{department}/neighborhoods', 'index');
+            Route::controller(DepartmentNeighborhoodController::class)->name('neighborhoods.')->group(function () {
+                Route::get('{department}/neighborhoods', 'index')->name('index');
             });
         });
 
@@ -61,3 +58,7 @@ Route::middleware(['throttle:api'])->prefix('v1')->group(function () {
 
     Route::get('neighborhoods', [NeighborhoodController::class, 'index']);
 });
+
+// Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+//     return $request->user();
+// });
