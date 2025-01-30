@@ -20,7 +20,8 @@ class TownController extends Controller
             return Town::select('id', 'name')->get();
         });
 
-        return response()->json($towns)
+        return response()
+            ->json($towns)
             ->header('Cache-Control', 'public, max-age=' . $cacheTTL)
             ->setEtag(md5($cacheKey));
     }

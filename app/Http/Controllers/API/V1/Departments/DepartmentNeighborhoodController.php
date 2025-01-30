@@ -27,9 +27,12 @@ class DepartmentNeighborhoodController extends Controller
                 ->get();
         });
 
-        return response()->json([
-            'department' => $department->name,
-            'neighborhoods' => $neighborhoods,
-        ]);
+        return response()
+            ->json([
+                'department' => $department->name,
+                'neighborhoods' => $neighborhoods,
+            ])
+            ->header('Cache-Control', 'public, max-age=' . $cacheTTL)
+            ->setEtag(md5($cacheKey));
     }
 }
