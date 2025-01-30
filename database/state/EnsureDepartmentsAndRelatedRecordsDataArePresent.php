@@ -4,7 +4,7 @@ namespace Database\State;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Str;
+use Illuminate\Support\Str;
 
 class EnsureDepartmentsAndRelatedRecordsDataArePresent
 {
