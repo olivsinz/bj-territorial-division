@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property-read \Illuminate\Database\Eloquent\Collection $neighborhoods
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Neighborhood> $neighborhoods
  */
 class District extends Model
 {
@@ -16,6 +16,8 @@ class District extends Model
 
     /**
      * Get the neighborhood for the district.
+     *
+     * @return HasMany<\App\Models\Neighborhood, $this>
      */
     public function neighborhoods(): HasMany
     {

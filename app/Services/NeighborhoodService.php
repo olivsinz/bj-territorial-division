@@ -19,13 +19,13 @@ class NeighborhoodService
     }
 
     /**
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator<>
+     * @return \Illuminate\Pagination\LengthAwarePaginator<\App\Models\Neighborhood>
      */
     public function get(int $pageSize = 20, int $page = 1)
     {
         return Neighborhood::paginate(
             $pageSize,
-            ['*'],
+            ['*'], // @phpstan-ignore argument.type
             'page',
             $page
         );

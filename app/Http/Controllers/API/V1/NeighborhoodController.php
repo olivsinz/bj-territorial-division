@@ -25,7 +25,7 @@ class NeighborhoodController extends Controller
         $neighborhoods = Cache::remember($cacheKey, $cacheTTL, function () use ($pageSize, $page) {
             return Neighborhood::paginate(
                 $pageSize,
-                ['*'],
+                ['*'], // @phpstan-ignore argument.type
                 'page',
                 $page
             );

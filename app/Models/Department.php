@@ -14,6 +14,8 @@ class Department extends Model
 
     /**
      * Get the towns for the department.
+     *
+     * @return HasMany<\App\Models\Town, $this>
      */
     public function towns(): HasMany
     {
@@ -22,6 +24,8 @@ class Department extends Model
 
     /**
      * Get all of the districts for the department.
+     *
+     * @return HasManyThrough<\App\Models\District, \App\Models\Town, $this>
      */
     public function districts(): HasManyThrough
     {

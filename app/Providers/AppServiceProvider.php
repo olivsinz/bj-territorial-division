@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -32,13 +31,8 @@ class AppServiceProvider extends ServiceProvider
         $this->configureCommands();
         $this->configureRateLimiter();
 
-        ResetPassword::createUrlUsing(function (mixed $notifiable, string $token) {
-            /** @var \Illuminate\Contracts\Auth\CanResetPassword $notifiable */
-            return config('app.frontend_url') . "/password-reset/{$token}?email={$notifiable->getEmailForPasswordReset()}";
-        });
-
         if ($this->app->environment('production')) {
-            Model::handleLazyLoadingViolationUsing(function ($model, $relation) {
+            Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
                 $class = get_class($model);
 
                 info("Attempted to lazy load [{$relation}] on model [{$class}].");
@@ -59,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
      */
     private function configureCommands(): void
     {
-        // DB::prohibitDestructiveCommands($this->app->isProduction());
+        DB::prohibitDestructiveCommands($this->app->isProduction());
     }
 
     /**

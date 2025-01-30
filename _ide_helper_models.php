@@ -40,7 +40,7 @@ namespace App\Models{
 /**
  * 
  *
- * @property-read \Illuminate\Database\Eloquent\Collection $neighborhoods
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Neighborhood> $neighborhoods
  * @property int $id
  * @property string $name
  * @property int $town_id
