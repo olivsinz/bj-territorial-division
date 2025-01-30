@@ -4113,7 +4113,7 @@ namespace Illuminate\Support\Facades {
          * @static 
          */        public static function lock($name, $seconds = 0, $owner = null)
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->lock($name, $seconds, $owner);
         }
                     /**
@@ -4125,7 +4125,7 @@ namespace Illuminate\Support\Facades {
          * @static 
          */        public static function restoreLock($name, $owner)
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->restoreLock($name, $owner);
         }
                     /**
@@ -4135,70 +4135,61 @@ namespace Illuminate\Support\Facades {
          * @static 
          */        public static function flush()
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->flush();
         }
                     /**
-         * Remove all expired tag set entries.
+         * Get the full path for the given cache key.
          *
-         * @return void 
+         * @param string $key
+         * @return string 
          * @static 
-         */        public static function flushStaleTags()
+         */        public static function path($key)
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        $instance->flushStaleTags();
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->path($key);
         }
                     /**
-         * Get the Redis connection instance.
+         * Get the Filesystem instance.
          *
-         * @return \Illuminate\Redis\Connections\Connection 
+         * @return \Illuminate\Filesystem\Filesystem 
          * @static 
-         */        public static function connection()
+         */        public static function getFilesystem()
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->connection();
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->getFilesystem();
         }
                     /**
-         * Get the Redis connection instance that should be used to manage locks.
+         * Get the working directory of the cache.
          *
-         * @return \Illuminate\Redis\Connections\Connection 
+         * @return string 
          * @static 
-         */        public static function lockConnection()
+         */        public static function getDirectory()
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->lockConnection();
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->getDirectory();
         }
                     /**
-         * Specify the name of the connection that should be used to store data.
+         * Set the working directory of the cache.
          *
-         * @param string $connection
-         * @return void 
+         * @param string $directory
+         * @return \Illuminate\Cache\FileStore 
          * @static 
-         */        public static function setConnection($connection)
+         */        public static function setDirectory($directory)
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        $instance->setConnection($connection);
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->setDirectory($directory);
         }
                     /**
-         * Specify the name of the connection that should be used to manage locks.
+         * Set the cache directory where locks should be stored.
          *
-         * @param string $connection
-         * @return \Illuminate\Cache\RedisStore 
+         * @param string|null $lockDirectory
+         * @return \Illuminate\Cache\FileStore 
          * @static 
-         */        public static function setLockConnection($connection)
+         */        public static function setLockDirectory($lockDirectory)
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->setLockConnection($connection);
-        }
-                    /**
-         * Get the Redis database instance.
-         *
-         * @return \Illuminate\Contracts\Redis\Factory 
-         * @static 
-         */        public static function getRedis()
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->getRedis();
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->setLockDirectory($lockDirectory);
         }
                     /**
          * Get the cache key prefix.
@@ -4207,19 +4198,8 @@ namespace Illuminate\Support\Facades {
          * @static 
          */        public static function getPrefix()
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->getPrefix();
-        }
-                    /**
-         * Set the cache key prefix.
-         *
-         * @param string $prefix
-         * @return void 
-         * @static 
-         */        public static function setPrefix($prefix)
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        $instance->setPrefix($prefix);
         }
             }
             /**
