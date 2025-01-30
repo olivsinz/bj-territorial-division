@@ -7,6 +7,7 @@ use App\Models\Neighborhood;
 use App\Services\NeighborhoodService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class NeighborhoodController extends Controller
 {
@@ -21,7 +22,7 @@ class NeighborhoodController extends Controller
         $cacheTTL = 3600;
         $cacheKey = $neighborhoodService->cacheKey($pageSize, $page);
 
-        $neighborhoods = cache()->remember($cacheKey, $cacheTTL, function () use ($pageSize, $page) {
+        $neighborhoods = Cache::remember($cacheKey, $cacheTTL, function () use ($pageSize, $page) {
             return Neighborhood::paginate(
                 $pageSize,
                 ['*'],

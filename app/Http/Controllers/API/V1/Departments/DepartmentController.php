@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\Departments;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class DepartmentController extends Controller
 {
@@ -16,7 +17,7 @@ class DepartmentController extends Controller
         $cacheTTL = 3600;
         $cacheKey = 'departments';
 
-        $departments = cache()->remember($cacheKey, $cacheTTL, function () {
+        $departments = Cache::remember($cacheKey, $cacheTTL, function () {
             return Department::select('id', 'name')->get();
         });
 

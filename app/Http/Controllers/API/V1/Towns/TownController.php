@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\Towns;
 use App\Http\Controllers\Controller;
 use App\Models\Town;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class TownController extends Controller
 {
@@ -16,7 +17,7 @@ class TownController extends Controller
         $cacheTTL = 3600;
         $cacheKey = 'towns';
 
-        $towns = cache()->remember($cacheKey, $cacheTTL, function () {
+        $towns = Cache::remember($cacheKey, $cacheTTL, function () {
             return Town::select('id', 'name')->get();
         });
 

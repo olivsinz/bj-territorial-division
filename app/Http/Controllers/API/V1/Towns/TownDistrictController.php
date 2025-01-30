@@ -19,6 +19,6 @@ class TownDistrictController extends Controller
                 'districts' => $town->districts,
             ])
             ->header('Cache-Control', 'public, max-age=3600')
-            ->setEtag(md5($town->updated_at));
+            ->setEtag(md5($town->name));
     }
 }

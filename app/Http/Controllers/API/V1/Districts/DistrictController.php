@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\Districts;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class DistrictController extends Controller
 {
@@ -16,7 +17,7 @@ class DistrictController extends Controller
         $cacheTTL = 3600;
         $cacheKey = 'districts';
 
-        $districts = cache()->remember($cacheKey, $cacheTTL, function () {
+        $districts = Cache::remember($cacheKey, $cacheTTL, function () {
             return District::select('id', 'name')->get();
         });
 

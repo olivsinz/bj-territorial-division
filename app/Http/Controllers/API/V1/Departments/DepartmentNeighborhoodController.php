@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\Departments;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class DepartmentNeighborhoodController extends Controller
@@ -17,7 +18,7 @@ class DepartmentNeighborhoodController extends Controller
         $cacheKey = 'departments.' . $department->name . '.neighborhoods';
         $cacheTTL = 3600;
 
-        $neighborhoods = cache()->remember($cacheKey, $cacheTTL, function () use ($department) {
+        $neighborhoods = Cache::remember($cacheKey, $cacheTTL, function () use ($department) {
             return DB::table('neighborhoods')
                 ->select('neighborhoods.name')
                 ->join('districts', 'districts.id', '=', 'neighborhoods.district_id')
