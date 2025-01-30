@@ -71,6 +71,11 @@ jobs:
           cp .env.ci .env
           php artisan key:generate
 
+      - name: Create Database
+        run: |
+          touch database/testing-database.sqlite
+          php artisan ensure:database-state-is-loaded
+
       - name: Tlint Code Inspection
         run: |
           ./vendor/bin/tlint
@@ -83,7 +88,7 @@ jobs:
       - name: Execute Unit/Features Tests
         env:
           DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
+          DB_DATABASE: database/testing-database.sqlite
           CACHE_DRIVER: array
           SESSION_DRIVER: array
           QUEUE_CONNECTION: sync
