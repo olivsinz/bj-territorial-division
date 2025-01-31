@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
@@ -53,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
      */
     private function configureCommands(): void
     {
-        DB::prohibitDestructiveCommands($this->app->isProduction());
+        DB::prohibitDestructiveCommands($this->app->environment('production'));
     }
 
     /**

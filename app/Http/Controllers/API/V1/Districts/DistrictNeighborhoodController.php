@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\API\V1\Districts;
 
 use App\Http\Controllers\Controller;

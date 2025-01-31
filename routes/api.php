@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\API\V1\Departments\DepartmentController;
 use App\Http\Controllers\API\V1\Departments\DepartmentDistrictController;
 use App\Http\Controllers\API\V1\Departments\DepartmentNeighborhoodController;

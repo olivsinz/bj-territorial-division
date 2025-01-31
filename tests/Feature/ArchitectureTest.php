@@ -20,28 +20,21 @@ test('ensure all files within App\Services use strict types')
     ->expect('App\Services')
     ->toUseStrictTypes();
 
-// arch('ensure provided namespaces here use strict types')
-//     ->expect([
-//         'App\Builders',
-//         'App\Enums',
-//         'App\Faker',
-//         'App\Http\Resources',
-//         'App\Traits',
-//         'App\ValueObjects',
-//     ])
-//     ->toUseStrictTypes()
-//     ->ignoring(['App\Traits\HandleFiles']);
+arch('ensure provided namespaces here use strict types')
+    ->expect([
+        'App\Http',
+        'App\Console',
+        'Database\State',
+        'Database\Seeders',
+        'Database\Factory',
+    ])
+    ->toUseStrictTypes()
+    ->ignoring(['App\Traits\HandleFiles']);
 
-// // Enums
-// test('ensure that all files within App\Enums namespace are enums')
-//     ->expect('App\Enums')
-//     ->toBeEnums()
-//     ->ignoring(['App\Enums\Concerns', 'App\Enums\Attributes']);
-
-// // Traits
-// test('ensure that all files within App\Traits namespace are traits')
-//     ->expect('App\Traits')
-//     ->toBeTraits();
+// Traits
+test('ensure that all files within App\Traits namespace are traits')
+    ->expect('App\Traits')
+    ->toBeTraits();
 
 // App\Actions
 test('ensure all files within App\Actions are classes')
