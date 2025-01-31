@@ -74,7 +74,7 @@ jobs:
       - name: Create Database
         run: |
           touch database/testing-database.sqlite
-          php artisan ensure:database-state-is-loaded
+          php artisan migrate:fresh
 
       - name: Tlint Code Inspection
         run: |
