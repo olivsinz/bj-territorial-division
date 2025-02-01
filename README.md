@@ -10,7 +10,6 @@ BJ Territorial Division API is a RESTful API built with Laravel to provide struc
 -   RESTful API endpoints for easy integration
 -   Built with Laravel for scalability and maintainability
 -   Well-documented API responses
--   Authentication and authorization for secure access
 
 ## Installation
 
