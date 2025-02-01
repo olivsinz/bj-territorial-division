@@ -3,17 +3,18 @@
 uses()->group('architecture');
 
 // Globals
-test('ensure that global function like "dd" is not used')
-    ->expect('dd')
-    ->not->toBeUsed();
+arch('ensure models are correct')
+    ->expect('App\Models')
+    ->toBeClasses()
+    ->toExtend('Illuminate\Database\Eloquent\Model');
 
-test('ensure that global function like "dump" is not used')
-    ->expect('dump')
-    ->not->toBeUsed();
+arch('ensure "App\Http" is only used in namespace "App\Http"')
+    ->expect('App\Http')
+    ->toOnlyBeUsedIn('App\Http');
 
-test('ensure that global function like "die" is not used')
-    ->expect('die')
-    ->not->toBeUsed();
+arch('ensure preset security is ok')->preset()->security()->ignoring('md5');
+arch('ensure preset php is ok')->preset()->php();
+// arch('ensure preset laravel is ok')->preset()->laravel();
 
 // Strict types
 test('ensure all files within App\Services use strict types')
