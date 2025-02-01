@@ -26,7 +26,15 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(
+            MigrationsEnded::class,
             function (MigrationsEnded $event) {
+                // down() method run during a rollback action. When rolling back,
+                // tables underlined by our state commands will not exist because they
+                // will be removed furing roll back.
+                if ($event->method === 'down') {
+                    return;
+                }
+
                 Artisan::call(EnsureDatabaseStateIsLoaded::COMMAND_SIGNATURE);
             }
         );
