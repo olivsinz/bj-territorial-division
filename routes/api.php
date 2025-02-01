@@ -12,7 +12,6 @@ use App\Http\Controllers\API\V1\NeighborhoodController;
 use App\Http\Controllers\API\V1\Towns\TownController;
 use App\Http\Controllers\API\V1\Towns\TownDistrictController;
 use App\Http\Controllers\API\V1\Towns\TownNeighborhoodController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['throttle:api'])->prefix('v1')->group(function () {
@@ -60,7 +59,3 @@ Route::middleware(['throttle:api'])->prefix('v1')->group(function () {
 
     Route::get('neighborhoods', [NeighborhoodController::class, 'index']);
 });
-
-// Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-//     return $request->user();
-// });
