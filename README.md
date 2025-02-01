@@ -19,16 +19,17 @@ Ensure you have the following installed:
 
 -   PHP (>=8.2)
 -   Composer
--   Laravel (latest version)
--   MySQL or PostgreSQL database
 
 ### Steps
 
 1. Clone the repository:
+
     ```bash
-    git clone https://github.com/yourusername/bj-territorial-api.git
+    git clone https://github.com/olivsinz/bj-territorial-division.git
+
     cd bj-territorial-api
     ```
+
 2. Install dependencies:
     ```bash
     composer install
