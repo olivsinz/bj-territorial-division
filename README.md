@@ -84,9 +84,8 @@ This project includes several developer tools:
 -   **Laravel Telescope** for debugging (disabled in production)
 -   **Pest PHP** for testing
 -   **PHPStan** for static analysis
--   **Laravel Pint** for code styling
+-   **Duster,TLint & Laravel Pint** for code styling and linting
 -   **IDE Helper** for better IDE support
--   **Duster & TLint** for linting
 
 Run the following commands to execute various tools:
 
