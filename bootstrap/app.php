@@ -6,6 +6,8 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -29,5 +31,25 @@ return Application::configure(basePath: dirname(__DIR__))
                     'message' => 'Not found.',
                 ], 404);
             }
+        });
+
+        $exceptions->render(function (TooManyRequestsHttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => 'Too Many Requests.',
+                ], 429);
+            }
+        });
+
+        $exceptions->render(function (ServiceUnavailableHttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => 'Service currently unavailable.',
+                ], 503);
+            }
+        });
+
+        $exceptions->shouldRenderJsonWhen(function ($request, \Throwable $error) {
+            return $request->expectsJson() || $request->is('api/*');
         });
     })->create();
