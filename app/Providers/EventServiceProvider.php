@@ -25,6 +25,14 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->configureDatabaseInitialState();
+    }
+
+    /**
+     * @return void
+     */
+    public function configureDatabaseInitialState()
+    {
         Event::listen(
             MigrationsEnded::class,
             function (MigrationsEnded $event) {
