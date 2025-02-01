@@ -98,10 +98,6 @@ composer tlint      # Run TLint checks
 composer duster-lint # Run Duster linting
 ```
 
-<!-- ## Contribution
-
-Feel free to submit pull requests or open issues for improvements. -->
-
 ## License
 
 This project is licensed under the MIT License.
